@@ -120,7 +120,8 @@ eta = np.log(theta3)
 
 lr = 1e-4 # learning rate
 
-num_minibatch = 10 # N for fullbatch, <N for minibatch
+# num_minibatch = 10 # N for fullbatch, <N for minibatch
+num_minibatch = N # fullbatch
 save_interval = 20
 epoch =200
 
