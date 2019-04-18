@@ -9,7 +9,8 @@ import glob
 
 ## define kernel function 
 def rbf(x, x_dash,  tau, sigma):
-    return np.exp(tau) * np.exp(-1* ((x-x_dash)**2)/np.exp(theta2))
+    # return np.exp(tau) * np.exp(-1* ((x-x_dash)**2)/np.exp(theta2))
+    return np.exp(tau) * np.exp(-1* ((x-x_dash)**2)/np.exp(sigma)) # theta2 --> sigma
 
 ## define gradient function
 def dk_dTAU(x, x_dash, n, n_dash,  tau, sigma, eta):
@@ -67,8 +68,9 @@ def gp_reg(x_train, y_train, x_test, tau, sigma, eta):
             for i,ix in enumerate(x_test)] for j,jx in enumerate(x_train)]
     k = np.array(k).reshape((N,M))
     
-    s = [[rbf(ix,jx,tau,sigma) + eta if i==j else rbf(ix,jx,tau,sigma) \
-            for i,ix in enumerate(x_test)] for j,jx in enumerate(x_test)]
+    # s = [[rbf(ix,jx,tau,sigma) + eta if i==j else rbf(ix,jx,tau,sigma) \
+    s = [[rbf(ix,jx,tau,sigma) \
+            for i,ix in enumerate(x_test)] for j,jx in enumerate(x_test)] # Delete eta
     s = np.array(s).reshape((M,M))
     
     # results
